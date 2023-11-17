@@ -4,6 +4,7 @@ start:
 
 .PHONEY: stop
 stop:
+	docker compose down
 	kind delete cluter
 
 .PHONEY: install-metallb
