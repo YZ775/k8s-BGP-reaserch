@@ -9,12 +9,14 @@ services:
       - /run/bird
     networks:
       - bird
+    privileged: true
   client:
     container_name: client
     image: ghcr.io/cybozu/ubuntu-debug:20.04.20231116
     networks:
       - bird
     command: "pause"
+    privileged: true
 networks:
   bird:
     driver: bridge

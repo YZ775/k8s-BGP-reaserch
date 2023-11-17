@@ -1,11 +1,11 @@
 .PHONEY: start
 start:
-	kind create cluster --config kind-config.yaml
+	kind create cluster --config cluster.yaml
 
 .PHONEY: stop
 stop:
 	docker compose down
-	kind delete cluter
+	kind delete cluster
 
 .PHONEY: install-metallb
 install-metallb:
@@ -33,6 +33,15 @@ deploy-resources:
 .PHONEY: birdcl
 birdcl:
 	docker exec -it bird birdcl
+
+.PHONEY: shell-bird
+shell-bird:
+	docker exec -it bird bash
+
+.PHONEY: install-tools
+install-tools:
+	docker exec -it bird apt-get update
+	docker exec -it bird apt-get install -y iproute2 iputils-ping net-tools
 
 .PHONEY: shell-client
 shell-client:
