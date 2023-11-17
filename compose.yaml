@@ -1,0 +1,25 @@
+version: "3"
+services:
+  bird:
+    container_name: bird
+    image: quay.io/cybozu/bird:2.14
+    volumes:
+      - ./bird/bird.conf:/etc/bird/bird.conf
+    tmpfs:
+      - /run/bird
+    networks:
+      - bird
+  client:
+    container_name: client
+    image: ghcr.io/cybozu/ubuntu-debug:20.04.20231116
+    networks:
+      - bird
+    command: "pause"
+networks:
+  bird:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+

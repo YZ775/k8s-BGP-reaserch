@@ -1,0 +1,46 @@
+log syslog all;
+router id 172.20.0.1;
+
+protocol device {
+    scan time 10;
+}
+protocol kernel {
+    scan time 10;
+    ipv4 {
+        export filter {
+            if proto = "direct1" then reject;
+            accept;
+        };
+    };
+}
+protocol direct direct1 {
+    ipv4;
+    interface "eth0";
+}
+
+protocol bgp {
+    ipv4 {
+        import all;
+        export all;
+    };
+    local as 65001;
+    neighbor __NODE_IP__  as 65000;
+}
+
+protocol bgp {
+    ipv4 {
+        import all;
+        export all;
+    };
+    local as 65001;
+    neighbor __NODE_IP__  as 65000;
+}
+
+protocol bgp {
+    ipv4 {
+        import all;
+        export all;
+    };
+    local as 65001;
+    neighbor __NODE_IP__  as 65000;
+}
